@@ -1,58 +1,50 @@
 package com.github.zr0n1.multiproto;
 
-import blue.endless.jankson.Comment;
-import blue.endless.jankson.JsonObject;
 import com.github.zr0n1.multiproto.parity.optional.TranslationParityHelper;
 import net.fabricmc.loader.api.FabricLoader;
-import net.glasslauncher.mods.api.gcapi.api.ConfigName;
-import net.glasslauncher.mods.api.gcapi.api.PreConfigSavedListener;
-import net.glasslauncher.mods.api.gcapi.impl.EventStorage;
+import net.glasslauncher.mods.gcapi3.api.ConfigEntry;
+import net.glasslauncher.mods.gcapi3.api.PreConfigSavedListener;
+import net.glasslauncher.mods.gcapi3.impl.EventStorage;
+import net.glasslauncher.mods.gcapi3.impl.GlassYamlFile;
 import net.minecraft.client.Minecraft;
 
 public class Config implements PreConfigSavedListener {
 
-    @ConfigName("Version name parity")
-    @Comment("Shows version name on HUD < Beta 1.6")
+    @ConfigEntry(name = "Version name parity", description = "Shows version name on HUD < Beta 1.6")
     public Boolean showVersion = true;
 
-    @ConfigName("\u200BTexture parity")
-    @Comment("Changes textures to match version")
+    @ConfigEntry(name = "\u200BTexture parity", description = "Changes textures to match version")
     public Boolean textureParity = true;
 
-    @ConfigName("\u200B\u200BLighting parity")
-    @Comment("Toggles smooth lighting to match version")
+    @ConfigEntry(name = "\u200B\u200BLighting parity", description = "Toggles smooth lighting to match version")
     public Boolean lightingParity = true;
 
-    @ConfigName("\u200B\u200B\u200BName rendering parity")
-    @Comment("Renders player names larger < Beta 1.3")
+    @ConfigEntry(name = "\u200B\u200B\u200BName rendering parity", description = "enders player names larger < Beta 1.3")
     public Boolean nameRenderParity = true;
 
-    @ConfigName("\u200B\u200B\u200B\u200BTooltip name parity")
-    @Comment("Changes tooltip names to match version")
+    @ConfigEntry(name = "\u200B\u200B\u200B\u200BTooltip name parity", description = "Changes tooltip names to match version")
     public Boolean translationParity = true;
 
-    @ConfigName("\u200B\u200B\u200B\u200B\u200BCustom version name")
-    @Comment("Shows custom version name on HUD")
+    @ConfigEntry(name = "\u200B\u200B\u200B\u200B\u200BCustom version name", description = "Shows custom version name on HUD")
     public String customVersionName = "";
 
-
     @Override
-    public void onPreConfigSaved(int source, JsonObject jsonA, JsonObject jsonB) {
-        boolean textureParityA = jsonA.getBoolean("textureParity", true);
-        boolean textureParityB = jsonB.getBoolean("textureParity", false);
-        boolean lightingParityA = jsonA.getBoolean("lightingParity", true);
-        boolean lightingParityB = jsonB.getBoolean("lightingParity", false);
-        boolean translationParityA = jsonA.getBoolean("translationParity", true);
-        boolean translationParityB = jsonB.getBoolean("translationParity", false);
+    public void onPreConfigSaved(int source, GlassYamlFile oldValues, GlassYamlFile newValues) {
+        boolean textureParityA = oldValues.getBoolean("textureParity", true);
+        boolean textureParityB = newValues.getBoolean("textureParity", false);
+        boolean lightingParityA = oldValues.getBoolean("lightingParity", true);
+        boolean lightingParityB = newValues.getBoolean("lightingParity", false);
+        boolean translationParityA = oldValues.getBoolean("translationParity", true);
+        boolean translationParityB = newValues.getBoolean("translationParity", false);
         if (source == EventStorage.EventSource.USER_SAVE) {
             Minecraft mc = (Minecraft) FabricLoader.getInstance().getGameInstance();
             if (textureParityA != textureParityB) {
                 textureParity = textureParityB;
-                mc.textureManager.method_1096();
+                mc.textureManager.reload();
             }
             if (lightingParityA != lightingParityB && mc.isWorldRemote()) {
                 lightingParity = lightingParityB;
-                mc.worldRenderer.method_1537();
+                mc.worldRenderer.reload();
             }
             if (translationParityA != translationParityB) {
                 translationParity = translationParityB;

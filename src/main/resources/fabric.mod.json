@@ -24,9 +24,6 @@
     ],
     "gcapi:presave": [
       "com.github.zr0n1.multiproto.Config"
-    ],
-    "hmifabric:item_list_refresh": [
-      "com.github.zr0n1.multiproto.parity.HMIFabricIntegrationHelper"
     ]
   },
   "mixins": [
@@ -35,14 +32,13 @@
   "depends": {
     "minecraft": "1.0.0-beta.7.3",
     "station-api-base": "*",
-    "gcapi": "*"
+    "gcapi3": "*"
   },
   "recommends": {
     "modmenu": "*"
   },
   "suggests": {
-    "mojangfixstationapi": "*",
-    "hmifabric": "*"
+    "mojangfixstationapi": "*"
   },
   "custom": {
     "loom:injected_interfaces": {

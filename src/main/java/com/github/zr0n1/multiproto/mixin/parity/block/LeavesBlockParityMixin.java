@@ -31,9 +31,9 @@ public abstract class LeavesBlockParityMixin extends Block {
             target = "Lnet/minecraft/world/BlockView;getBlockMeta(III)I", shift = At.Shift.AFTER), cancellable = true)
     private void applyColorParity(BlockView blockView, int x, int y, int z, CallbackInfoReturnable<Integer> cir) {
         if (ProtocolVersionManager.isBefore(ProtocolVersion.BETA_8)) {
-            blockView.method_1781().method_1788(x, z, 1, 1);
-            double temperature = blockView.method_1781().field_2235[0];
-            double humidity = blockView.method_1781().field_2236[0];
+            blockView.method_1781().getBiomesInArea(x, z, 1, 1);
+            double temperature = blockView.method_1781().temperatureMap[0];
+            double humidity = blockView.method_1781().downfallMap[0];
             cir.setReturnValue(FoliageColors.getColor(temperature, humidity));
         }
     }

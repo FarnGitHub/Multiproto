@@ -49,7 +49,7 @@ public class TextureParityHelper {
             Block.REDSTONE_WIRE.textureId = 164;
         }
         Minecraft mc = (Minecraft) FabricLoader.getInstance().getGameInstance();
-        if (mc.worldRenderer != null) mc.worldRenderer.method_1537();
+        if (mc.worldRenderer != null) mc.worldRenderer.reload();
         Multiproto.LOGGER.info("Registered version parity textures");
     }
 }

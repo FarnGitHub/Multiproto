@@ -20,14 +20,14 @@ public class MinecraftMixin {
     @Shadow
     private static Minecraft INSTANCE;
 
-    @Inject(method = "method_2148", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "isAmbientOcclusionEnabled", at = @At("HEAD"), cancellable = true)
     private static void applyLightingParity(CallbackInfoReturnable<Boolean> cir) {
         cir.setReturnValue(!(Multiproto.config.lightingParity &&
                 ProtocolVersionManager.isBefore(ProtocolVersion.BETA_9)) &&
                 INSTANCE != null && INSTANCE.options.ao);
     }
 
-    @Inject(method = "method_2120", at = @At("HEAD"))
+    @Inject(method = "startGame", at = @At("HEAD"))
     private void joinSinglePlayerWorld(CallbackInfo ci) {
         ProtocolVersionManager.setVersion(ProtocolVersion.BETA_14);
     }
