@@ -23,7 +23,7 @@ public class TextureParityHelper {
     public static final int[] redstoneWireTextures = new int[2];
 
     @EventListener
-    void registerTextures(TextureRegisterEvent event) {
+    public void registerTextures(TextureRegisterEvent event) {
         applyParity();
     }
 

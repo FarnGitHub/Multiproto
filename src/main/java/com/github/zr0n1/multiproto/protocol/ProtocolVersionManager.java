@@ -7,6 +7,7 @@ import com.github.zr0n1.multiproto.parity.ItemParityHelper;
 import com.github.zr0n1.multiproto.parity.RecipeParityHelper;
 import com.github.zr0n1.multiproto.parity.optional.TextureParityHelper;
 import com.github.zr0n1.multiproto.parity.optional.TranslationParityHelper;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.Minecraft;
 
 import java.io.*;
@@ -15,6 +16,7 @@ public final class ProtocolVersionManager {
 
     private static ProtocolVersion version = ProtocolVersion.BETA_14;
     private static ProtocolVersion lastVersion;
+    private static File configDir = new File(FabricLoader.getInstance().getConfigDir().toFile(), "multiproto");
 
     public static ProtocolVersion getVersion() {
         return version;
@@ -37,7 +39,7 @@ public final class ProtocolVersionManager {
 
     public static ProtocolVersion getLastVersion() {
         if (lastVersion == null) {
-            File file = new File(Minecraft.getRunDirectory(), "config/multiproto/lastversion.txt");
+            File file = new File(configDir, "lastversion.txt");
             if (file.exists()) {
                 try {
                     BufferedReader br = new BufferedReader(new FileReader(file));
@@ -56,14 +58,19 @@ public final class ProtocolVersionManager {
 
     public static void setLastVersion(ProtocolVersion lastVersion) {
         if (ProtocolVersionManager.lastVersion != lastVersion) {
-            File file = new File(Minecraft.getRunDirectory(), "config/multiproto/lastversion.txt");
+            File file = new File(configDir, "lastversion.txt");
             try {
                 PrintWriter pw = new PrintWriter(new FileWriter(file));
                 pw.print(ProtocolVersionManager.lastVersion = lastVersion);
                 pw.close();
             } catch (Exception e) {
                 Multiproto.LOGGER.error("Error writing last protocol version to text file");
+                e.printStackTrace();
             }
         }
+    }
+
+    static {
+        configDir.mkdirs();
     }
 }

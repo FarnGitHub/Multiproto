@@ -29,7 +29,7 @@ public abstract class RedstoneWireBlockTextureMixin extends Block {
 
     @Inject(method = "getColorMultiplier", at = @At("HEAD"), cancellable = true)
     private void applyTextureColorParity(BlockView blockView, int x, int y, int z, CallbackInfoReturnable<Integer> cir) {
-        if (ProtocolVersionManager.isBefore(ProtocolVersion.BETA_11) && Multiproto.config.textureParity) {
+        if ((ProtocolVersionManager.getVersion().isAlphaplaceClient() || ProtocolVersionManager.isBefore(ProtocolVersion.BETA_11)) && Multiproto.config.textureParity) {
             cir.setReturnValue(super.getColorMultiplier(blockView, x, y, z));
         }
     }

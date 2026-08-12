@@ -18,7 +18,7 @@ public class PlayerEntityOnLadderMixin extends LivingEntityMixin  {
 
     @Unique
     private boolean multiproto_IsLadderOnTop() {
-        if(ProtocolVersionManager.isBefore(ProtocolVersion.BETA_11)) return false;
+        if(!(ProtocolVersionManager.getVersion().isAlphaplaceClient() || ProtocolVersionManager.isBefore(ProtocolVersion.BETA_11))) return false;
         MultiplayerClientPlayerEntity player = (MultiplayerClientPlayerEntity)(Object)this;
         int x = MathHelper.floor(player.x);
         int y = MathHelper.floor(player.boundingBox.minY);

@@ -12,6 +12,7 @@ public class ProtocolVersion implements Comparable<ProtocolVersion> {
     public static final SortedSet<ProtocolVersion> ALPHA_PROTOCOL_VERSIONS = new TreeSet<>();
     public static final SortedSet<ProtocolVersion> BETA_PROTOCOL_VERSIONS = new TreeSet<>();
 
+    public static final ProtocolVersion AP_CLIENT_2 =  new ProtocolVersion(2000, Type.AP_CLIENT, "2.02");
     /**
      * Beta 1.7 - Beta 1.7.3
      */
@@ -184,6 +185,10 @@ public class ProtocolVersion implements Comparable<ProtocolVersion> {
         return Integer.compare(this.version, version.version);
     }
 
+    public boolean isAlphaplaceClient() {
+        return this.type == Type.AP_CLIENT;
+    }
+
     /**
      * Enum representing protocol version type.
      */
@@ -207,7 +212,8 @@ public class ProtocolVersion implements Comparable<ProtocolVersion> {
         /**
          * Beta 1.2 - Beta 1.7.3.
          */
-        BETA("Beta", "b", false);
+        BETA("Beta", "b", false),
+        AP_CLIENT("Alphaplace Client", "apc", false);
 
         public final String label;
         public final String shortLabel;

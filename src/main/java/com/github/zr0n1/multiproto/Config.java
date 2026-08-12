@@ -1,14 +1,7 @@
 package com.github.zr0n1.multiproto;
-
-import com.github.zr0n1.multiproto.parity.optional.TranslationParityHelper;
-import net.fabricmc.loader.api.FabricLoader;
 import net.glasslauncher.mods.gcapi3.api.ConfigEntry;
-import net.glasslauncher.mods.gcapi3.api.PreConfigSavedListener;
-import net.glasslauncher.mods.gcapi3.impl.EventStorage;
-import net.glasslauncher.mods.gcapi3.impl.GlassYamlFile;
-import net.minecraft.client.Minecraft;
 
-public class Config implements PreConfigSavedListener {
+public class Config {
 
     @ConfigEntry(name = "Version name parity", description = "Shows version name on HUD < Beta 1.6")
     public Boolean showVersion = true;
@@ -28,28 +21,9 @@ public class Config implements PreConfigSavedListener {
     @ConfigEntry(name = "\u200B\u200B\u200B\u200B\u200BCustom version name", description = "Shows custom version name on HUD")
     public String customVersionName = "";
 
-    @Override
-    public void onPreConfigSaved(int source, GlassYamlFile oldValues, GlassYamlFile newValues) {
-        boolean textureParityA = oldValues.getBoolean("textureParity", true);
-        boolean textureParityB = newValues.getBoolean("textureParity", false);
-        boolean lightingParityA = oldValues.getBoolean("lightingParity", true);
-        boolean lightingParityB = newValues.getBoolean("lightingParity", false);
-        boolean translationParityA = oldValues.getBoolean("translationParity", true);
-        boolean translationParityB = newValues.getBoolean("translationParity", false);
-        if (source == EventStorage.EventSource.USER_SAVE) {
-            Minecraft mc = (Minecraft) FabricLoader.getInstance().getGameInstance();
-            if (textureParityA != textureParityB) {
-                textureParity = textureParityB;
-                mc.textureManager.reload();
-            }
-            if (lightingParityA != lightingParityB && mc.isWorldRemote()) {
-                lightingParity = lightingParityB;
-                mc.worldRenderer.reload();
-            }
-            if (translationParityA != translationParityB) {
-                translationParity = translationParityB;
-                TranslationParityHelper.applyParity();
-            }
-        }
-    }
+    @ConfigEntry(name = "Server side sound (AP Protocol Only)", description = "Make client play sound based on what server say")
+    public Boolean play62Sound = false;
+
+    @ConfigEntry(name = "Server side block breaking (AP Protocol Only)", description = "Visible Block breaking from other player")
+    public Boolean blockBreaking = false;
 }
