@@ -12,7 +12,7 @@ public class ProtocolVersion implements Comparable<ProtocolVersion> {
     public static final SortedSet<ProtocolVersion> ALPHA_PROTOCOL_VERSIONS = new TreeSet<>();
     public static final SortedSet<ProtocolVersion> BETA_PROTOCOL_VERSIONS = new TreeSet<>();
 
-    public static final ProtocolVersion AP_CLIENT_2 =  new ProtocolVersion(2000, Type.AP_CLIENT, "2.02");
+    public static final ProtocolVersion UB_A126 =  new ProtocolVersion(2000, Type.UB_CLIENT, "1.2.6");
     /**
      * Beta 1.7 - Beta 1.7.3
      */
@@ -159,7 +159,14 @@ public class ProtocolVersion implements Comparable<ProtocolVersion> {
         return name(lastClient, abbreviate);
     }
 
+    public String versionTextName() {
+        return name(lastClient, false);
+    }
+
     private String name(String s, boolean abbreviate) {
+        if(isBukkitClient()) {
+            return (abbreviate ? "UB a" : "UberBukkit-Client Alpha ") + lastClient + s;
+        }
         return (abbreviate ? type.shortLabel : type.label) + (abbreviate ? "" : " ") + (type.alpha && !abbreviate ? "v" : "") + s;
     }
 
@@ -185,8 +192,8 @@ public class ProtocolVersion implements Comparable<ProtocolVersion> {
         return Integer.compare(this.version, version.version);
     }
 
-    public boolean isAlphaplaceClient() {
-        return this.type == Type.AP_CLIENT;
+    public boolean isBukkitClient() {
+        return this.type == Type.UB_CLIENT;
     }
 
     /**
@@ -213,7 +220,7 @@ public class ProtocolVersion implements Comparable<ProtocolVersion> {
          * Beta 1.2 - Beta 1.7.3.
          */
         BETA("Beta", "b", false),
-        AP_CLIENT("Alphaplace Client", "apc", false);
+        UB_CLIENT("UberBukkit Client", "ub", false);
 
         public final String label;
         public final String shortLabel;
