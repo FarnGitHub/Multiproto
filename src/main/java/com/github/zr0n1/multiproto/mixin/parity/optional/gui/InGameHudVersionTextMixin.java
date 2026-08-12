@@ -38,7 +38,7 @@ public abstract class InGameHudVersionTextMixin extends DrawContext {
             slice = @Slice(from = @At(value = "FIELD", target = "Lnet/minecraft/client/option/GameOptions;debugHud:Z", ordinal = 0)))
     private void addDebugText(CallbackInfo ci) {
         ProtocolVersion version = ProtocolVersionManager.getVersion();
-        if (minecraft.isWorldRemote()) {
+        if (Multiproto.config.showProtocol && minecraft.isWorldRemote()) {
             minecraft.textRenderer.drawWithShadow("Protocol version: " + version.nameRange(true)
                             + " (" + version.version + ")",
                     2, (MultiprotoMixinPlugin.shouldApplyMojangFixStAPIDebugScreenIntegration() ? 116 : 100), 14737632);

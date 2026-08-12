@@ -3,6 +3,9 @@ import net.glasslauncher.mods.gcapi3.api.ConfigEntry;
 
 public class Config {
 
+    @ConfigEntry(name="show protocol", description = "Show Version Protocol in F3 Debug Screen")
+    public Boolean showProtocol = true;
+
     @ConfigEntry(name = "Version name parity", description = "Shows version name on HUD < Beta 1.6")
     public Boolean showVersion = true;
 

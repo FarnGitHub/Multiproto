@@ -216,6 +216,9 @@ public class ProtocolVersion implements Comparable<ProtocolVersion> {
          * Beta 1.2 - Beta 1.7.3.
          */
         BETA("Beta", "b", false),
+        /**
+         * UberBukkit Client
+         */
         UB_CLIENT("UberBukkit Client", "ub", false);
 
         public final String label;
