@@ -9,7 +9,7 @@ import org.lwjgl.opengl.GL11;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class AlphaPlaceClientHandler {
+public class UberBukkitClientHandler {
 
     public static HashMap<BlockPos, BlockBreakingPacket> mpDigging = new HashMap<>();
 

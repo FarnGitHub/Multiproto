@@ -1,6 +1,6 @@
 package farn.multiproto.mixin;
 
-import farn.multiproto.AlphaPlaceClientHandler;
+import farn.multiproto.UberBukkitClientHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.render.GameRenderer;
 import org.spongepowered.asm.mixin.Mixin;
@@ -17,6 +17,6 @@ public class GameRendererMixin {
 
     @Inject(method="renderFrame", at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glBlendFunc(II)V", shift = At.Shift.BEFORE))
     public void multiproto_renderMpBlockBreak(CallbackInfo ci) {
-        AlphaPlaceClientHandler.render(this.client);
+        UberBukkitClientHandler.render(this.client);
     }
 }

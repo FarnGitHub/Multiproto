@@ -1,7 +1,7 @@
 package farn.multiproto.packet;
 
 import com.github.zr0n1.multiproto.Multiproto;
-import farn.multiproto.AlphaPlaceClientHandler;
+import farn.multiproto.UberBukkitClientHandler;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.NetworkHandler;
@@ -43,12 +43,12 @@ public class BlockBreakingPacket extends Packet {
 
 		BlockPos cc = new BlockPos(x, y, z);
 
-		if (AlphaPlaceClientHandler.mpDigging.containsKey(cc)) {
-			AlphaPlaceClientHandler.mpDigging.remove(cc, this);
+		if (UberBukkitClientHandler.mpDigging.containsKey(cc)) {
+			UberBukkitClientHandler.mpDigging.remove(cc, this);
 		}
 
 		if (progress != 0F) {
-			AlphaPlaceClientHandler.mpDigging.put(cc, this);
+			UberBukkitClientHandler.mpDigging.put(cc, this);
 		}
 
 	}
