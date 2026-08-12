@@ -159,13 +159,9 @@ public class ProtocolVersion implements Comparable<ProtocolVersion> {
         return name(lastClient, abbreviate);
     }
 
-    public String versionTextName() {
-        return name(lastClient, false);
-    }
-
     private String name(String s, boolean abbreviate) {
         if(isBukkitClient()) {
-            return (abbreviate ? "UB a" : "UberBukkit-Client Alpha ") + lastClient + s;
+            return (abbreviate ? "UB a" : "UberBukkit-Client Alpha ") + s;
         }
         return (abbreviate ? type.shortLabel : type.label) + (abbreviate ? "" : " ") + (type.alpha && !abbreviate ? "v" : "") + s;
     }
