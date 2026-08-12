@@ -19,7 +19,7 @@
       "com.github.zr0n1.multiproto.Multiproto",
       "com.github.zr0n1.multiproto.parity.optional.TextureParityHelper"
     ],
-    "gcapi": [
+    "gcapi3": [
       "com.github.zr0n1.multiproto.Multiproto"
     ],
     "gcapi:presave": [
