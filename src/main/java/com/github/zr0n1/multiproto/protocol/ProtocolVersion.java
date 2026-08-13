@@ -166,6 +166,13 @@ public class ProtocolVersion implements Comparable<ProtocolVersion> {
         return (abbreviate ? type.shortLabel : type.label) + (abbreviate ? "" : " ") + (type.alpha && !abbreviate ? "v" : "") + s;
     }
 
+    public String versionName() {
+        if(isBukkitClient()) {
+            return "Alpha " + lastClient;
+        }
+        return name(lastClient, false);
+    }
+
     /**
      * @return {@link String} representing the {@link ProtocolVersion} by {@link #type} and {@link #version}.<br>
      * (Example: {@link #BETA_14} -> {@code "beta_14"})

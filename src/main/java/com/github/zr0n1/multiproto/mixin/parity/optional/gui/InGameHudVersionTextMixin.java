@@ -29,7 +29,7 @@ public abstract class InGameHudVersionTextMixin extends DrawContext {
                 !minecraft.options.debugHud) {
             GL11.glPushMatrix();
             minecraft.textRenderer.drawWithShadow("Minecraft " +
-                    (custom.isBlank() ? ProtocolVersionManager.getVersion().name(false) : custom), 2, 2, 16777215);
+                    (custom.isBlank() ? ProtocolVersionManager.getVersion().versionName() : custom), 2, 2, 16777215);
             GL11.glPopMatrix();
         }
     }
