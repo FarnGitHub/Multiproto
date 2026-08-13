@@ -21,7 +21,7 @@ public abstract class SlabBlockTextureMixin {
     @Inject(method = "getTexture(II)I", at = @At("HEAD"), cancellable = true)
     private void applyTextureParity(int side, int meta, CallbackInfoReturnable<Integer> cir) {
         if ((ProtocolVersionManager.getVersion().isBukkitClient() || ProtocolVersionManager.isBefore(ProtocolVersion.BETA_14)) && Multiproto.config.textureParity) {
-            if (!isFullCube() && side > 1) cir.setReturnValue(TextureParityHelper.slabSideTextures[meta]);
+            if (!isFullCube() && side > 1) cir.setReturnValue(TextureParityHelper.getSlabTexture(meta));
             else if (meta == 3) cir.setReturnValue(Block.COBBLESTONE.textureId);
         }
     }

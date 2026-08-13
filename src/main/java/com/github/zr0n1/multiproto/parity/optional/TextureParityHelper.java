@@ -16,11 +16,11 @@ public class TextureParityHelper {
     /**
      * smooth stone, sandstone, planks, cobblestone
      */
-    public static final int[] slabSideTextures = new int[4];
+    private static final int[] slabSideTextures = new int[4];
     /**
      * cross off, cross on
      */
-    public static final int[] redstoneWireTextures = new int[2];
+    private static final int[] redstoneWireTextures = new int[2];
 
     @EventListener
     public void registerTextures(TextureRegisterEvent event) {
@@ -51,5 +51,13 @@ public class TextureParityHelper {
         Minecraft mc = (Minecraft) FabricLoader.getInstance().getGameInstance();
         if (mc.worldRenderer != null) mc.worldRenderer.reload();
         Multiproto.LOGGER.info("Registered version parity textures");
+    }
+
+    public static int getSlabTexture(int meta) {
+        return slabSideTextures[meta % slabSideTextures.length];
+    }
+
+    public static int getRedstoneWireTexture(int meta) {
+        return redstoneWireTextures[meta % redstoneWireTextures.length];
     }
 }
