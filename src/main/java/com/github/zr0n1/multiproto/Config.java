@@ -24,9 +24,9 @@ public class Config {
     @ConfigEntry(name = "\u200B\u200B\u200B\u200B\u200BCustom version name", description = "Shows custom version name on HUD")
     public String customVersionName = "";
 
-    @ConfigEntry(name = "Server side sound (AP Protocol Only)", description = "Make client play sound based on what server say")
+    @ConfigEntry(name = "Server side sound (UB Protocol Only)", description = "Make client play sound based on what server say")
     public Boolean play62Sound = false;
 
-    @ConfigEntry(name = "Server side block breaking (AP Protocol Only)", description = "Visible Block breaking from other player")
+    @ConfigEntry(name = "Server side block breaking (UB Protocol Only)", description = "Visible Block breaking from other player")
     public Boolean blockBreaking = false;
 }
