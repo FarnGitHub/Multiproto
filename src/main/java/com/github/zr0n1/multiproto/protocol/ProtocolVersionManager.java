@@ -37,6 +37,10 @@ public final class ProtocolVersionManager {
         return version.isBefore(target);
     }
 
+    public static boolean isBeforeOrBukkitClient(ProtocolVersion version) {
+        return isBefore(version) || (getVersion().isBukkitClient());
+    }
+
     public static ProtocolVersion getLastVersion() {
         if (lastVersion == null) {
             File file = new File(configDir, "lastversion.txt");
